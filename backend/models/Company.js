@@ -40,9 +40,6 @@ class Company {
       );
       return result.rows[0];
     } catch (error) {
-      if (error.code === '23505') { // Unique constraint violation
-        throw new Error('Company with this name already exists');
-      }
       throw new Error(`Error creating company: ${error.message}`);
     }
   }
@@ -57,9 +54,6 @@ class Company {
       );
       return result.rows[0];
     } catch (error) {
-      if (error.code === '23505') { // Unique constraint violation
-        throw new Error('Company with this name already exists');
-      }
       throw new Error(`Error updating company: ${error.message}`);
     }
   }
