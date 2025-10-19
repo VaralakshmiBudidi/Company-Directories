@@ -121,7 +121,9 @@ const apiSlice = createSlice({
       })
       .addCase(createCompany.fulfilled, (state, action) => {
         state.loading = false;
+        // Add the new company to the list
         state.companies.push(action.payload);
+        // Update filtered companies to include the new company
         state.filteredCompanies = state.companies;
       })
       .addCase(createCompany.rejected, (state, action) => {

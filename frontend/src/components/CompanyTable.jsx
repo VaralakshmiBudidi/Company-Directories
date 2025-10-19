@@ -85,8 +85,12 @@ const CompanyTable = () => {
           id: selectedCompany.id, 
           companyData 
         })).unwrap();
+        // Refetch companies to ensure we have the latest data
+        dispatch(fetchCompanies());
       } else {
         await dispatch(createCompany(companyData)).unwrap();
+        // Refetch companies to ensure we have the latest data
+        dispatch(fetchCompanies());
       }
       setIsModalOpen(false);
       setIsEditMode(false);
@@ -144,6 +148,8 @@ const CompanyTable = () => {
   const handleDeleteConfirm = async () => {
     try {
       await dispatch(deleteCompany(selectedCompany.id)).unwrap();
+      // Refetch companies to ensure we have the latest data
+      dispatch(fetchCompanies());
       setIsDeleteModalOpen(false);
       setSelectedCompany(null);
     } catch (error) {
