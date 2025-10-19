@@ -80,13 +80,15 @@ const CompanyTable = () => {
 
   const handleCreateCompany = async (companyData) => {
     try {
+      console.log('Creating company with data:', companyData);
       if (isEditMode) {
         await dispatch(updateCompany({ 
           id: selectedCompany.id, 
           companyData 
         })).unwrap();
       } else {
-        await dispatch(createCompany(companyData)).unwrap();
+        const result = await dispatch(createCompany(companyData)).unwrap();
+        console.log('Company created successfully:', result);
       }
       setIsModalOpen(false);
       setIsEditMode(false);
