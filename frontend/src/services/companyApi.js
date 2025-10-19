@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 export const companyApi = {
   // Get all companies
@@ -48,29 +48,6 @@ export const companyApi = {
       return await response.json();
     } catch (error) {
       console.error('Error creating company:', error);
-      throw error;
-    }
-  },
-
-  // Update company
-  updateCompany: async (id, companyData) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/companies/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(companyData),
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to update company');
-      }
-      
-      return await response.json();
-    } catch (error) {
-      console.error('Error updating company:', error);
       throw error;
     }
   },
