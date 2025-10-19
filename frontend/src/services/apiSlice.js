@@ -18,9 +18,12 @@ export const createCompany = createAsyncThunk(
   'company/createCompany',
   async (companyData, { rejectWithValue }) => {
     try {
+      console.log('🔄 Redux: createCompany action called with data:', companyData);
       const newCompany = await companyApi.createCompany(companyData);
+      console.log('🔄 Redux: createCompany action completed successfully:', newCompany);
       return newCompany;
     } catch (error) {
+      console.log('🔄 Redux: createCompany action failed with error:', error.message);
       return rejectWithValue(error.message);
     }
   }
