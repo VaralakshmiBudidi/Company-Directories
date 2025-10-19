@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://company-directories-backend.vercel.app/api';
+const API_BASE_URL = 'https://company-directories-backend.vercel.app/api';
 
 export const companyApi = {
   // Get all companies
