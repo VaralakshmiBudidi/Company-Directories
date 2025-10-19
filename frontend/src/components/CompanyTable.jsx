@@ -23,9 +23,6 @@ const CompanyTable = () => {
     dispatch(fetchCompanies());
   }, [dispatch]);
 
-
-
-
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {

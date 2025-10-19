@@ -7,5 +7,4 @@ const store = configureStore({
   },
 });
 
-console.log("STore ", store);
 export default store;
