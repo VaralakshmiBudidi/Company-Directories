@@ -124,7 +124,9 @@ const apiSlice = createSlice({
         // Add the new company to the list
         state.companies.push(action.payload);
         // Update filtered companies to include the new company
-        state.filteredCompanies = state.companies;
+        state.filteredCompanies = [...state.companies];
+        // Clear any existing errors
+        state.error = null;
       })
       .addCase(createCompany.rejected, (state, action) => {
         state.loading = false;
@@ -140,8 +142,9 @@ const apiSlice = createSlice({
         const index = state.companies.findIndex(company => company.id === action.payload.id);
         if (index !== -1) {
           state.companies[index] = action.payload;
-          state.filteredCompanies = state.companies;
+          state.filteredCompanies = [...state.companies];
         }
+        state.error = null;
       })
       .addCase(updateCompany.rejected, (state, action) => {
         state.loading = false;
@@ -155,7 +158,8 @@ const apiSlice = createSlice({
       .addCase(deleteCompany.fulfilled, (state, action) => {
         state.loading = false;
         state.companies = state.companies.filter(company => company.id !== action.payload);
-        state.filteredCompanies = state.companies;
+        state.filteredCompanies = [...state.companies];
+        state.error = null;
       })
       .addCase(deleteCompany.rejected, (state, action) => {
         state.loading = false;
