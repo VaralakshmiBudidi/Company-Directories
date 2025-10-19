@@ -83,22 +83,19 @@ const CompanyTable = () => {
 
   const handleCreateCompany = async (companyData) => {
     try {
-      console.log('Creating company with data:', companyData);
       if (isEditMode) {
         await dispatch(updateCompany({ 
           id: selectedCompany.id, 
           companyData 
         })).unwrap();
       } else {
-        const result = await dispatch(createCompany(companyData)).unwrap();
-        console.log('Company created successfully:', result);
+        await dispatch(createCompany(companyData)).unwrap();
       }
       setIsModalOpen(false);
       setIsEditMode(false);
       setSelectedCompany(null);
     } catch (error) {
       console.error('Error saving company:', error);
-      // You could show a toast notification here
     }
   };
 

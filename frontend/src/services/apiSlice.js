@@ -18,12 +18,9 @@ export const createCompany = createAsyncThunk(
   'company/createCompany',
   async (companyData, { rejectWithValue }) => {
     try {
-      console.log('🔄 Redux: createCompany action called with data:', companyData);
       const newCompany = await companyApi.createCompany(companyData);
-      console.log('🔄 Redux: createCompany action completed successfully:', newCompany);
       return newCompany;
     } catch (error) {
-      console.log('🔄 Redux: createCompany action failed with error:', error.message);
       return rejectWithValue(error.message);
     }
   }
@@ -109,11 +106,10 @@ const apiSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchCompanies.fulfilled, (state, action) => {
-        console.log('fetchCompanies.fulfilled - payload:', action.payload);
         state.loading = false;
         state.companies = action.payload;
         state.filteredCompanies = action.payload;
-        state.error = null; // Clear any existing errors
+        state.error = null;
       })
       .addCase(fetchCompanies.rejected, (state, action) => {
         state.loading = false;
@@ -125,21 +121,12 @@ const apiSlice = createSlice({
         state.error = null;
       })
       .addCase(createCompany.fulfilled, (state, action) => {
-        console.log('createCompany.fulfilled - payload:', action.payload);
         state.loading = false;
-        // Add the new company to the list
         state.companies.push(action.payload);
-        // Update filtered companies to include the new company
         state.filteredCompanies = [...state.companies];
-        // Clear any existing errors
         state.error = null;
-        console.log('createCompany.fulfilled - state after update:', { 
-          companiesCount: state.companies.length, 
-          error: state.error 
-        });
       })
       .addCase(createCompany.rejected, (state, action) => {
-        console.log('createCompany.rejected - error:', action.payload);
         state.loading = false;
         state.error = action.payload;
       })

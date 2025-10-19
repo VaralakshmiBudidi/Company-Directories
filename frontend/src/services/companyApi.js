@@ -32,9 +32,6 @@ export const companyApi = {
   // Create new company
   createCompany: async (companyData) => {
     try {
-      console.log('🌐 API: Making POST request to create company with data:', companyData);
-      console.log('🌐 API: Request URL:', `${API_BASE_URL}/companies`);
-      
       const response = await fetch(`${API_BASE_URL}/companies`, {
         method: 'POST',
         headers: {
@@ -43,20 +40,14 @@ export const companyApi = {
         body: JSON.stringify(companyData),
       });
       
-      console.log('🌐 API: Response status:', response.status);
-      console.log('🌐 API: Response ok:', response.ok);
-      
       if (!response.ok) {
         const errorData = await response.json();
-        console.log('🌐 API: Error response data:', errorData);
         throw new Error(errorData.message || 'Failed to create company');
       }
       
-      const result = await response.json();
-      console.log('🌐 API: Success response:', result);
-      return result;
+      return await response.json();
     } catch (error) {
-      console.error('🌐 API: Error creating company:', error);
+      console.error('Error creating company:', error);
       throw error;
     }
   },

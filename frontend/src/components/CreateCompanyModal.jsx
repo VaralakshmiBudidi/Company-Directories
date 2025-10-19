@@ -72,16 +72,11 @@ const CreateCompanyModal = ({ isOpen, onClose, onSubmit, company = null, isEditM
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    console.log('📝 Modal form submitted with data:', formData);
-    
     if (validateForm()) {
-      console.log('✅ Form validation passed, calling onSubmit');
       onSubmit(formData);
       setFormData({ name: '', location: '', industry: '' });
       setErrors({});
       onClose();
-    } else {
-      console.log('❌ Form validation failed');
     }
   };
 
